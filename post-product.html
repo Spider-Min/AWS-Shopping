@@ -241,20 +241,26 @@
                                         <div class="col-lg-6">
                                             <p class="comment-form">
                                                 <span>Title* </span>
-                                                <input type="text" required="required" name="title" placeholder="wihtin 50 characters">
+                                                <input id="title" type="text" required="required" name="title" placeholder="wihtin 50 characters">
                                             </p>
                                         </div>
                                         <div class="col-lg-6">
                                             <p class="comment-form">
                                                 <span>Price* </span>
-                                                <input type="number" min="0" max="9999" required="required" name="price" placeholder="">
+                                                <input id="price" type="number" min="0" max="9999" required="required" name="price" placeholder="">
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <p class="comment-form">
+                                                <span>Address* </span>
+                                                <input id="address" type="text" min="0" max="9999" required="required" name="price" placeholder="">
                                             </p>
                                         </div>
 
                                         <div class="col-lg-6">
                                             <p class="comment-form">
                                                 <span>Category* </span>
-                                                <select class="nice-select" name="category">
+                                                <select id="category" class="nice-select" name="category">
                                                     <option value="Kitchen">Kitchen</option>
                                                     <option value="Furniture">Furniture</option>
                                                     <option value="Books">Books</option>
@@ -266,7 +272,7 @@
                                         <div class="col-lg-6">
                                             <p class="comment-form">
                                                 <span>Product Name* </span>
-                                                <input type="text" required="required" name="sub_cat" placeholder="Cooker, Keyboard, Monitor...">
+                                                <input id="product_name" type="text" required="required" name="sub_cat" placeholder="Cooker, Keyboard, Monitor...">
                                             </p>
                                         </div>
                                         <div class="col-lg-6">
@@ -278,7 +284,12 @@
                                             <!-- <button id="search-btn" type="button" class="btn btn-link" style="display:none"> -->
                                                 <!-- <i class="icon ion-ios-cloud-upload"></i> -->
                                             <!-- </button>   -->
-                                            <i class="icon ion-ios-cloud-upload-outline" id="search-btn" style="display:none; font-size: 30px; cursor:pointer;" title="Click to Upload" onclick=""></i>      
+<!--                                             <button class="icon ion-ios-cloud-upload-outline" id="upload-btn" style="display:none; font-size: 30px; cursor:pointer;" title="Click to Upload" onclick="">
+                                                <i class="fas fa-upload"></i>
+                                            </button>    -->   
+                                            <button id="upload-btn" type="button" class="btn btn-link">
+                                                <i class="fas fa-upload">Upload this image</i>
+                                            </button>  
                                             <div id="preview_box2">
                                                 <img id="preview" />    
                                             </div> 
@@ -287,14 +298,16 @@
                                         <div class="col-lg-12">
                                             <p class="comment-form-comment">
                                                 <span>Description* </span>
-                                                <textarea class="comment-notes" required="required" placeholder=""></textarea>
+                                                <textarea id="description" class="comment-notes" required="required" placeholder=""></textarea>
                                             </p>
                                         </div>
 
                                         
                                         <div class="col-lg-12">
                                             <div class="comment-form-submit">
-                                                <button class="comment-submit">SUBMIT</button>
+                                            <label id = "submitBtn">Submit</label>  
+                                                <!-- <button id = "submitBtn">SUBMIT</button> -->
+
                                             </div>
                                         </div>
                                     </div>

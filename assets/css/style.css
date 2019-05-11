@@ -14605,7 +14605,7 @@ justify-content: space-between;*/
     display: none;
 }
 
-#img_label2 {
+#img_label2, #submitBtn{
     font-size: 14px;
     background-color: #f2d547;
     border-radius: 5px;
