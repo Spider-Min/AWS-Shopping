@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html class="no-js" lang="en">
 
 <head>
@@ -108,7 +108,7 @@
                                 <div class="user-wrap">
                                     <!-- TODO: pass USER ID -->
                                     <!-- TODO: Add Icon -->
-                                    <a href="post-product.html"><i class="icon ion-ios-contact"></i></a>
+                                    <a href="post-product.html"><i class="icon ion_alert_circled"></i></a>
                                 </div>
 
                                 <div class="shopping-cart-wrap">
@@ -214,11 +214,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="breadcrumb-title">Shop Left Sidebar</h2>
+                        <h2 class="breadcrumb-title">Signle Product</h2>
                         <!-- breadcrumb-list start -->
                         <ul class="breadcrumb-list">
                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active">Shop left sidebar</li>
+                            <li class="breadcrumb-item active">Signle Product</li>
                         </ul>
                         <!-- breadcrumb-list end -->
                     </div>
@@ -229,123 +229,158 @@
 
 
         <!-- main-content-wrap start -->
-        <div class="main-content-wrap shop-page section-ptb">
+        <div class="main-content-wrap section-ptb product-details-page">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 order-lg-1 order-2">
-                        <!-- shop-sidebar-wrap start -->
-                        <div class="shop-sidebar-wrap">
-
-                            <!-- shop-sidebar start -->
-                            <div class="shop-sidebar mb-30">
-                                <h4 class="title">FILTER BY PRICE</h4>
-                                <!-- filter-price-content start -->
-                                <div class="filter-price-content">
-                                    <form action="#" method="post">
-                                        <div id="price-slider" class="price-slider"></div>
-                                        <div class="filter-price-wapper">
-                                            <div class="filter-price-cont">
-                                                <span>Price:</span>
-                                                <div class="input-type">
-                                                    <input type="text" id="min-price" readonly="" />
-                                                </div>
-                                                <span>—</span>
-                                                <div class="input-type">
-                                                    <input type="text" id="max-price" readonly="" />
-                                                </div>
-                                                <a class="add-to-cart-button" href="#">
-                                                    <span>FILTER</span>
-                                                </a>
-                                            </div>
+                    <div class="col-lg-12">
+                        <div class="comments-reply-area">
+                            <h5 class="comment-reply-title mb-30">Leave a Reply</h5>
+                            <form action="#" class="comment-form-area">
+                                <div class="comment-input">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <p class="comment-form">
+                                                <span>Title* </span>
+                                                <input type="text" required="required" name="title" placeholder="wihtin 50 characters">
+                                            </p>
                                         </div>
-                                    </form>
-                                </div>
-                                <!-- filter-price-content end -->
-                            </div>
-                            <!-- shop-sidebar end -->
-
-                            <!-- shop-sidebar start -->
-                            <div class="shop-sidebar mb-30">
-                                <h4 class="title">CATEGORIES</h4>
-                                <ul>
-                                    <li><a onclick="getCat('All')">All </a></li>
-                                    <li><a onclick="getCat('Kitchen')">Kitchen </a></li>
-                                    <li><a onclick="getCat('Furniture')">Furniture </a></li>
-                                    <li><a onclick="getCat('Books')">Books </a></li>
-                                    <li><a onclick="getCat('Electronics')">Electronics </a></li>
-                                    <li><a onclick="getCat('Other')">Other </a></li>
-                                </ul>
-                            </div>
-                            <!-- shop-sidebar end -->
-
-                        </div>
-                        <!-- shop-sidebar-wrap end -->
-                    </div>
-                    <div class="col-lg-9 order-lg-2 order-1">
-                        <!-- shop-product-wrapper start -->
-                        <div class="shop-product-wrapper">
-                            <div class="row">
-                                <div class="col">
-                                    <!-- shop-top-bar start -->
-                                    <div class="shop-top-bar">
-                                        <!-- product-short start -->
-                                        <span>Sort by: </span>
-                                        <div class="product-short">
-                                            <select class="nice-select" onchange="sortby(this.options[this.options.selectedIndex].value)" name="sortby">
-                                                <option value="date">Create Time</option>
-                                                <option value="low">Price(Low > High)</option>
-                                                <option value="high">Price(High > Low)</option>
-                                            </select>
+                                        <div class="col-lg-6">
+                                            <p class="comment-form">
+                                                <span>Price* </span>
+                                                <input type="number" min="0" max="9999" required="required" name="price" placeholder="">
+                                            </p>
                                         </div>
-                                        <!-- product-short end -->
-                                    </div>
-                                    <!-- shop-top-bar end -->
-                                </div>
-                            </div>
 
-                            <!-- shop-products-wrap start -->
-                            <div class="shop-products-wrap">
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="grid">
-                                        <div class="shop-product-wrap">
-                                            <div class="row" id="productWrapper">
+                                        <div class="col-lg-6">
+                                            <p class="comment-form">
+                                                <span>Category* </span>
+                                                <select class="nice-select" name="category">
+                                                    <option value="Kitchen">Kitchen</option>
+                                                    <option value="Furniture">Furniture</option>
+                                                    <option value="Books">Books</option>
+                                                    <option value="Electronics">Electronics</option>
+                                                    <option value="Other" selected>Other</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <p class="comment-form">
+                                                <span>Product Name* </span>
+                                                <input type="text" required="required" name="sub_cat" placeholder="Cooker, Keyboard, Monitor...">
+                                            </p>
+                                        </div>
+
+
+                                        <div class="col-lg-12">
+                                            <p class="comment-form-comment">
+                                                <span>Description* </span>
+                                                <textarea class="comment-notes" required="required" placeholder=""></textarea>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="comment-form-submit">
+                                                <button class="comment-submit">SUBMIT</button>
                                             </div>
                                         </div>
                                     </div>
-                                
                                 </div>
-                            </div>
-                            <!-- shop-products-wrap end -->
-
-                            <!-- paginatoin-area start -->
-                            <div class="paginatoin-area">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12">
-                                        <ul class="pagination-box">
-                                            <li><a class="Previous" href="#"><i class="ion-chevron-left"></i></a>
-                                            </li>
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li>
-                                                <a class="Next" href="#"><i class="ion-chevron-right"></i> </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- paginatoin-area end -->
+                            </form>
                         </div>
-                        <!-- shop-product-wrapper end -->
                     </div>
                 </div>
             </div>
         </div>
         <!-- main-content-wrap end -->
 
+
+
+
+
         <footer>
             <div class="footer-top section-pb section-pt-60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="widget-footer mt-20">
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src="assets/images/logo/logo.png" alt=""></a>
+                                </div>
+                                <p>long established fact that a reader will be distracted by the readable content by the readable content established fact that</p>
+                                <div class="newsletter-footer">
+                                    <input type="text" placeholder="You Email">
+                                    <div class="subscribe-button">
+                                        <button class="subscribe-btn">Subscribe</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6">
+                            <div class="widget-footer mt-30">
+                                <h6 class="title-widget">QUICK LINK</h6>
+                                <ul class="footer-list">
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Quick Contact</a></li>
+                                    <li><a href="#">Blog Pages</a></li>
+                                    <li><a href="#">Concord History</a></li>
+                                    <li><a href="#">Client Feed</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="widget-footer mt-30">
+                                <h6 class="title-widget">QUICK CONTACT</h6>
+                                <ul class="footer-contact">
+                                    <li>
+                                        <label>Phone</label>
+                                        <a href="#">+88013678456313</a>
+                                    </li>
+                                    <li>
+                                        <label>Email</label>
+                                        <a href="#">fultala11@gmail.com</a>
+                                    </li>
+                                    <li>
+                                        <label>Address</label>
+                                        34/5 evergreen road, concord city <br> New work, United States
+                            </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="widget-footer mt-30">
+                                <h6 class="title-widget">LATEST BLOG</h6>
+                                <ul class="footer-blog">
+                                    <li>
+                                        <div class="widget-blog-wrap">
+                                            <div class="widget-blog-image">
+                                                <a href="#"><img src="assets/images/blog/small-blog.jpg" alt=""></a>
+                                            </div>
+                                            <div class="widget-blog-content">
+                                                <h6><a href="#">Some patience for the modern market</a></h6>
+                                                <div class="widget-blog-meta">
+                                                    <span>21 Aug 2019</span> <span>By <a href="#">Admin</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="widget-blog-wrap">
+                                            <div class="widget-blog-image">
+                                                <a href="#"><img src="assets/images/blog/small-blog-02.jpg" alt=""></a>
+                                            </div>
+                                            <div class="widget-blog-content">
+                                                <h6><a href="#">Modern market Some patience for the </a></h6>
+                                                <div class="widget-blog-meta">
+                                                    <span>13 Aug 2019</span> <span>By <a href="#">Admin</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="footer-bottom">
                 <div class="container">
@@ -367,7 +402,6 @@
     <!-- JS
 ============================================ -->
 
-
     <!-- Modernizer JS -->
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jQuery JS -->
@@ -375,8 +409,6 @@
     <!-- Bootstrap JS -->
     <script src="assets/js/vendor/popper.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
-
-    <script src="assets/js/api/productList.js"></script>
 
     <!-- Slick Slider JS -->
     <script src="assets/js/plugins/slick.min.js"></script>
