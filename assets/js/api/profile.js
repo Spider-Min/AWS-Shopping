@@ -3,6 +3,7 @@ getSold(false)
 function getSold(status) {
     console.log("Get start");
     document.getElementById("productWrapper").innerHTML = "";
+    
     if(status == false){
         document.getElementById("cate").innerHTML = "Selling";
     }else{
@@ -108,25 +109,28 @@ function mark_sold(id, status) {
     var bool_status = status;
 
     if (status == true){
-        status = "False";
+        status = "false";
     }else{
-        status = "True";
+        status = "true";
     }
 
     param={
-        "id" : id,
+        "id" : id.toString(),
         "mark" : status
     }
     $.ajax({
-        // TODO: Update API
-        url: 'https://5ehgjrjfef.execute-api.us-east-1.amazonaws.com/test',
+        url: 'https://tofr8vq8y5.execute-api.us-east-1.amazonaws.com/beta/es-marksold',
         type: 'POST',
         data: JSON.stringify(param),
         contentType: "application/json",
         dataType: "json",
         success: function (response) {
-            console.log(response)
-            getSold(bool_status);
+            console.log(response);
+            setTimeout(function(){
+                //put your code in here to be delayed by 2 seconds
+                getSold(bool_status);
+            },1000);
+            
         },
         error: function (data) {
             alert("Please wait for some time!")

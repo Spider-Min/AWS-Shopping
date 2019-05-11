@@ -269,7 +269,20 @@
                                                 <input type="text" required="required" name="sub_cat" placeholder="Cooker, Keyboard, Monitor...">
                                             </p>
                                         </div>
-
+                                        <div class="col-lg-6">
+                                            <div>Upload Photo* </div>
+                                            <input id="img_input2" type="file" accept="image/*" onchange="imgPreview(this)">
+                                            <label for="img_input2" id="img_label2">Choose an Image
+                                                <!-- <i class="fas fa-plus fa-lg"></i> -->
+                                            </label>   
+                                            <!-- <button id="search-btn" type="button" class="btn btn-link" style="display:none"> -->
+                                                <!-- <i class="icon ion-ios-cloud-upload"></i> -->
+                                            <!-- </button>   -->
+                                            <i class="icon ion-ios-cloud-upload-outline" id="search-btn" style="display:none; font-size: 30px; cursor:pointer;" title="Click to Upload" onclick=""></i>      
+                                            <div id="preview_box2">
+                                                <img id="preview" />    
+                                            </div> 
+                                        </div>
 
                                         <div class="col-lg-12">
                                             <p class="comment-form-comment">
@@ -277,6 +290,8 @@
                                                 <textarea class="comment-notes" required="required" placeholder=""></textarea>
                                             </p>
                                         </div>
+
+                                        
                                         <div class="col-lg-12">
                                             <div class="comment-form-submit">
                                                 <button class="comment-submit">SUBMIT</button>
@@ -409,6 +424,8 @@
     <!-- Bootstrap JS -->
     <script src="assets/js/vendor/popper.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
+
+    <script src="assets/js/api/post-product.js"></script>
 
     <!-- Slick Slider JS -->
     <script src="assets/js/plugins/slick.min.js"></script>
