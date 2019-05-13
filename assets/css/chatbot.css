@@ -1,0 +1,106 @@
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,0);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.button {
+  position: fixed;
+  left:87%;
+  bottom:8%;
+  font-size: 1em;
+  padding: 10px;
+  color: white;
+  border: 2px solid #ff5151;
+  background: #ff5151;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  opacity: 1;
+  background: #ff5151;
+  color: white;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.0);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  height: 400px;
+  position: relative;
+  bottom: 5%;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.chat-input{
+  position: absolute;
+  bottom: 5px;
+  right:20px;
+  left: 0px;
+}
+
+.chat-output{
+  position: absolute;
+  height: 500px;
+  bottom: 0px;
+  overflow:scroll;
+}
+

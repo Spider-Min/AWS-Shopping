@@ -1,3 +1,49 @@
+var code = "";
+var LAT = -34.397 ;
+var LNG = 150.644;
+$(document).ready(function(){
+    if(window.location.href.indexOf("id_token") >= 0){
+        var urlParams = new URLSearchParams(window.location.href.split("#")[1]);
+        id_token = urlParams.get("id_token");
+        console.log("11111");
+        console.log(id_token);
+        getPage();
+    }
+    else if(window.location.href.indexOf("code") >= 0){
+        console.log("22222")
+        var urlParams = new URLSearchParams(window.location.search);
+        code = urlParams.get("code");
+        getPage();
+        requestbody = "grant_type=authorization_code&client_id=5kbhnk2fusff1srn6fkg9jmmvj&code=" + code + "&redirect_uri=https://d2xcb4zq5w9bzj.cloudfront.net/";
+        $.ajax({
+            url:"https://fisher.auth.us-east-1.amazoncognito.com/oauth2/token",
+            method:"POST",
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: requestbody,
+            success:function(data){
+                console.log(data)
+                access_token = data['access_token'];
+                var id_token = data['id_token'];
+                refresh_token = data['refresh_token'];
+                console.log(id_token)
+                // var decoded1 = JSON.parse(atob(id_token.split('.')[1]));
+                var decoded = jwt_decode(id_token);
+                email = decoded['email'];
+                console.log(decoded);  
+            }
+        });
+
+    }
+    else{ // Not signed in
+        console.log("33333")
+        window.location.href = "https://fisher.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=5kbhnk2fusff1srn6fkg9jmmvj&redirect_uri=https://d2xcb4zq5w9bzj.cloudfront.net/";
+    }
+});
+
+
+
 const uploadicon = $("#upload-btn");
 const submitBtn = $("#submitBtn");
 var isUpload = false;
@@ -18,6 +64,21 @@ uploadicon.on("click", (e) => {
 //         $("input[type='submit']").attr("disabled", "disabled");
 //     }
 // });
+
+
+function getPage(){
+    // document.getElementById("post-product-div2").innerHTML = "";
+    // document.getElementById("profile-div2").innerHTML = ""; 
+    // $('#post-product-div2').append(
+    //     '<a href="post-product.html?code='+code+'"><i class="icon ion-ios-cloud-upload"></i></a>'
+    // ) 
+    // $('#profile-div2').append(
+    //    ' <a href="user.html?code='+code+'"><i class="icon ion-ios-contact"></i></a>'
+    // )
+    $('#hlink4').attr("href","index.html?code=" + code);
+    $('#post-product-div2').attr("href","post-product.html?code=" + code);
+    $('#profile-div2').attr("href","user.html?code=" + code);
+}
 
 function imgPreview(fileDom) {
     //check if support FileReader
@@ -42,11 +103,12 @@ function imgPreview(fileDom) {
         img.src = e.target.result;
     };
     reader.readAsDataURL(file);
-    $("#search-btn").show();
+    // $("#search-btn").show();
+    // $("#upload-btn").disabled = false;
 }
 
 // Get the latitude and longitude and translate to readable address 
-getAddress()
+// getAddress()
 function getAddress() {
     console.log("Start get address")
     
@@ -59,6 +121,8 @@ function getAddress() {
             console.log(pos);
             position = pos;
             Gposition = position['lat'] + ',' + position['lng'];
+            LAT = position['lat'];
+            LNG = position['lng'];
             // To get real address of user
             $.ajax({
                 url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+position['lat']+','+position['lng']+'&key=AIzaSyDUpZI_rtzDZ8TYqOEJEezVrWo9QoG1ozM&language=en'
@@ -69,6 +133,7 @@ function getAddress() {
                     address = response['results'][0]['formatted_address']
                     console.log(address)
                     $('#address').val(address)
+                    initMap(position['lat'], position['lng'])
 
                 
                 },
@@ -126,49 +191,54 @@ function postItem() {
     console.log(isUpload)
     if($("#title").val()!="" && $("#price").val()!="" && $("#address").val()!="" && $("category").val() != "" && $("product_name").val()!="" && $("description").val() != "" && isUpload==true){
         return new Promise((resolve) => {
-            console.log("clicked")
-            var category = $("#category").val();
-            var  title = $("#title").val();
             var price =  $("#price").val();
-            var address = $("#address").val();
-            var product_name = $("#product_name").val();
-            var description = $("#description").val();
-            var file = $('#img_input2')[0].files[0];
-            var file_url = "https://s3.amazonaws.com/itemphotos/" + file["name"];
-            var info = {
-                "seller_id" : "11111",
-                "title" : title,
-                "price" : price,
-                "address" : address,
-                "location" : Gposition,
-                "sub_cat" : product_name,
-                "description": description,
-                "pic_url" : file_url,
-                "category" : category,
+            if(0 < Number(price)){
+                var category = $("#category").val();
+                var  title = $("#title").val();
+                var address = $("#address").val();
+                var product_name = $("#product_name").val();
+                var description = $("#description").val();
+                var file = $('#img_input2')[0].files[0];
+                var file_url = "https://s3.amazonaws.com/itemphotos/" + file["name"];
+                var info = {
+                    "seller_email" : sessionStorage.getItem('email'),
+                    "title" : title,
+                    "price" : price,
+                    "address" : address,
+                    "location" : Gposition,
+                    "sub_cat" : product_name,
+                    "description": description,
+                    "pic_url" : file_url,
+                    "category" : category,
+                }
+
+
+                $.ajax({
+                    url: 'https://tofr8vq8y5.execute-api.us-east-1.amazonaws.com/beta/es-create' ,
+                    type: 'POST',
+                    cache: false, //no cache
+                    crossDomain: true,
+                    processData: false, 
+                    headers : {
+                        // 'X-Api-Key' : 'A3GinRuZUS8NhyJ5uiqN75WjWEaCUX077WTpQi8B'
+                    },
+                    data: JSON.stringify(info),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                        window.location.href="index.html?code=" + code;
+                    },
+                    error: function (data) {
+                        alert("Upload error!")
+                        console.log(data);
+                    }
+                })   
+            }
+            else{
+                alert("Price must is positive");
             }
 
-
-            $.ajax({
-                url: 'https://tofr8vq8y5.execute-api.us-east-1.amazonaws.com/beta/es-create' ,
-                type: 'POST',
-                cache: false, //no cache
-                data: info,
-                crossDomain: true,
-                processData: false, 
-                headers : {
-                    // 'X-Api-Key' : 'A3GinRuZUS8NhyJ5uiqN75WjWEaCUX077WTpQi8B'
-                },
-                data: JSON.stringify(info),
-                contentType: "application/json",
-                dataType: "json",
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (data) {
-                    alert("Upload error!")
-                    console.log(data);
-                }
-            })  
             // resolve();
         });
     }
@@ -176,4 +246,12 @@ function postItem() {
         console.log("Please fill all blanks")
     }
 
+}
+
+var map;
+function initMap() {
+map = new google.maps.Map(document.getElementById('map'), {
+  center: {lat: LAT, lng: LNG},
+  zoom: 15
+});
 }

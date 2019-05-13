@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="assets/css/plugins/slick.css">
     <link rel="stylesheet" href="assets/css/plugins/animation.css">
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
+    
 
     <!-- Vendor & Plugins CSS (Please remove the comment from below vendor.min.css & plugins.min.css for better website load performance and remove css files from avobe) -->
     <!--
@@ -31,7 +32,13 @@
 
     <!-- Main Style CSS (Please use minify version for better website load performance) -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/chatbot.css">
+    <link rel="stylesheet" href="assets/css/new.css">
     <!--<link rel="stylesheet" href="assets/css/style.min.css">-->
+
+    <script type="text/javascript" src="libs/aws-sdk.min.js"></script>
+    <script type="text/javascript" src="libs/amazon-cognito-identity.min.js"></script>
+    <script src="assets/js/jwt-decode.min.js"></script>
 
 </head>
 
@@ -42,7 +49,7 @@
         <header class="fl-header">
 
             <!-- Header Top Start -->
-            <div class="header-top-area d-none d-lg-block">
+<!--             <div class="header-top-area d-none d-lg-block">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -73,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Header Top End -->
 
             <!-- haeader bottom Start -->
@@ -82,20 +89,11 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-4 col-5">
                             <div class="logo-area">
-                                <a href="index.html"><img src="assets/images/logo/logo.png" alt=""></a>
+                                <a id = "hlink2" href="index.html"><img style = "height: 100px" src="assets/images/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-8 d-none d-lg-block">
                             <div class="main-menu-area text-center">
-                                <!--  Start Mainmenu Nav-->
-                                <nav class="main-navigation">
-                                    <ul>
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="shop.html">Shop List</a>
-                                        <li><a href="product-details.html">Product Details</a></li>
-                                    </ul>
-                                </nav>
-
                             </div>
                         </div>
 
@@ -105,21 +103,13 @@
                                     <a href="#" class="trigger-search"><i class="ion-ios-search-strong"></i></a>
                                 </div>
 
-                                <div class="user-wrap">
-                                    <!-- TODO: pass USER ID -->
-                                    <!-- TODO: Add Icon -->
-                                    <a href="post-product.html"><i class="icon ion-ios-contact"></i></a>
+                                <div class="user-wrap" >
+                                   <a href="post-product.html" id = "post-product-div"><i class="icon ion-ios-cloud-upload"></i></a>
+                                    <!-- <a href="post-product.html"><i class="icon ion-ios-contact"></i></a> -->
                                 </div>
 
-                                <div class="shopping-cart-wrap">
-                                    <!-- TODO: pass USER ID -->
-                                    <a href="user.html"><i class="icon ion-ios-contact"></i></a>
-                                </div>
-
-                                <div class="mobile-menu-btn d-block d-lg-none">
-                                    <div class="off-canvas-btn">
-                                        <i class="ion-android-menu"></i>
-                                    </div>
+                                <div class="shopping-cart-wrap" >
+                                    <a href="user.html" id = "profile-div"><i class="icon ion-ios-contact"></i></a>
                                 </div>
 
                             </div>
@@ -137,8 +127,8 @@
                 <div class="sidebar-search-input">
                     <form>
                         <div class="form-search">
-                            <input id="search" class="input-text" value="" placeholder="Search entire store here ..." type="search">
-                            <button class="search-btn" type="button">
+                            <input id="search" class="input-text" value="" placeholder="" type="search">
+                            <button class="search-btn" type="button" onclick="searchKeyword($('#search').val())">
                                 <i class="ion-ios-search"></i>
                             </button>
                         </div>
@@ -148,61 +138,7 @@
             <!-- main-search start -->
 
 
-            <!-- off-canvas menu start -->
-            <aside class="off-canvas-wrapper">
-                <div class="off-canvas-overlay"></div>
-                <div class="off-canvas-inner-content">
-                    <div class="btn-close-off-canvas">
-                        <i class="ion-android-close"></i>
-                    </div>
-
-                    <div class="off-canvas-inner">
-
-                        <!-- mobile menu start -->
-                        <div class="mobile-navigation">
-
-                            <!-- mobile menu navigation start -->
-                            <nav>
-                                <ul class="mobile-menu">
-                                    <li><a href="index.html">Home</a></li>
-									<li><a href="shop.html">Shop List</a>
-									<li><a href="product-details.html">Product Details</a></li>
-                                </ul>
-                            </nav>
-                            <!-- mobile menu navigation end -->
-                        </div>
-                        <!-- mobile menu end -->
-
-
-
-                        <!-- offcanvas widget area start -->
-                        <div class="offcanvas-widget-area">
-                            <div class="off-canvas-contact-widget">
-                                <ul>
-                                    <li>
-                                        Mon - Fri : 9am to 5pm
-                                    </li>
-                                    <li>
-                                        <a href="#">0123456789</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">info@yourdomain.com</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="off-canvas-social-widget">
-                                <a href="#"><i class="ion-social-facebook"></i></a>
-                                <a href="#"><i class="ion-social-twitter"></i></a>
-                                <a href="#"><i class="ion-social-tumblr"></i></a>
-                                <a href="#"><i class="ion-social-googleplus"></i></a>
-                            </div>
-
-                        </div>
-                        <!-- offcanvas widget area end -->
-                    </div>
-                </div>
-            </aside>
-            <!-- off-canvas menu end -->
+            
 
 
         </header>
@@ -214,11 +150,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="breadcrumb-title">Shop Left Sidebar</h2>
+                        <h2 class="breadcrumb-title">Katchup</h2>
                         <!-- breadcrumb-list start -->
                         <ul class="breadcrumb-list">
                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active">Shop left sidebar</li>
+                            <!-- <li class="breadcrumb-item active">Ketchup</li> -->
                         </ul>
                         <!-- breadcrumb-list end -->
                     </div>
@@ -235,34 +171,6 @@
                     <div class="col-lg-3 order-lg-1 order-2">
                         <!-- shop-sidebar-wrap start -->
                         <div class="shop-sidebar-wrap">
-
-                            <!-- shop-sidebar start -->
-                            <div class="shop-sidebar mb-30">
-                                <h4 class="title">FILTER BY PRICE</h4>
-                                <!-- filter-price-content start -->
-                                <div class="filter-price-content">
-                                    <form action="#" method="post">
-                                        <div id="price-slider" class="price-slider"></div>
-                                        <div class="filter-price-wapper">
-                                            <div class="filter-price-cont">
-                                                <span>Price:</span>
-                                                <div class="input-type">
-                                                    <input type="text" id="min-price" readonly="" />
-                                                </div>
-                                                <span>—</span>
-                                                <div class="input-type">
-                                                    <input type="text" id="max-price" readonly="" />
-                                                </div>
-                                                <a class="add-to-cart-button" href="#">
-                                                    <span>FILTER</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- filter-price-content end -->
-                            </div>
-                            <!-- shop-sidebar end -->
 
                             <!-- shop-sidebar start -->
                             <div class="shop-sidebar mb-30">
@@ -293,6 +201,7 @@
                                         <div class="product-short">
                                             <select class="nice-select" onchange="sortby(this.options[this.options.selectedIndex].value)" name="sortby">
                                                 <option value="date">Create Time</option>
+                                                <option value="distance">Distance</option>
                                                 <option value="low">Price(Low > High)</option>
                                                 <option value="high">Price(High > Low)</option>
                                             </select>
@@ -318,26 +227,32 @@
                             <!-- shop-products-wrap end -->
 
                             <!-- paginatoin-area start -->
-                            <div class="paginatoin-area">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12">
-                                        <ul class="pagination-box">
-                                            <li><a class="Previous" href="#"><i class="ion-chevron-left"></i></a>
-                                            </li>
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li>
-                                                <a class="Next" href="#"><i class="ion-chevron-right"></i> </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+
                             <!-- paginatoin-area end -->
                         </div>
                         <!-- shop-product-wrapper end -->
+                        <!-- <button id = "popBtn" onclick="pop()">Click</button> -->
+                        <!-- <div id="chatbot-div"> -->
+                           
+                        <!-- </div> -->
+                        <!-- The pop up chat window -->
+                        <div id="popup1" class="overlay">
+                            <div class="popup" id="chatWindow" >
+                                <h4>Chat with our Chatbot</h4>
+                                <a class="close" href="#">&times;</a>
+                                  <div class="chat-output" id="chat-output">
+                                    <div class="user-message">
+                                      <div class="message">Hi! I'm a bot. What's up?</div>
+                                    </div>
+                                  </div>
+
+                                  <div class="chat-input">
+                                    <form action="#0" id="user-input-form">
+                                      <input type="text" id="user-input" class="user-input" placeholder="Talk to the bot.">
+                                    </form>
+                                  </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -392,6 +307,9 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js"></script>
 
 </body>
 
