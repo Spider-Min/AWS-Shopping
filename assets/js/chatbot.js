@@ -72,19 +72,25 @@ function chat(code){
                    if (reg.exec(text) != null){
                         var sentence = text.split(',')
                         console.log(sentence)
+                        // No items find
                         if (sentence[1].length == 0){
                             msg = "Do not have such item.";
                             outputArea.append("\n<div class='user-message'>\n<div class='message'>\n" + msg + "\n </div>\n</div>\n");
                         }
+                        // Find items and return html link
                         else{
                             for(var cnt = 1; cnt < sentence.length; cnt++){
                                 var newSen = sentence[cnt] + "&code=" + code;
                                 // outputArea.append("\n<div class='user-message'>\n<div class='message'>\n" + newSen + "\n </div>\n</div>\n");
+                                $('#chat-output div').empty();
+                                outputArea.append("\n<div class='bot-message'>\n<div class='message'>\n" +
+                                "Hi! I'm a bot. What's up?" + "\n</div>\n</div>\n");
                                 window.open(newSen);
                                 break;
                             }
                         }
                    }
+                   // Regular conversation
                    else{
                     outputArea.append("\n<div class='user-message'>\n<div class='message'>\n" + text + "\n </div>\n</div>\n");
                    }
